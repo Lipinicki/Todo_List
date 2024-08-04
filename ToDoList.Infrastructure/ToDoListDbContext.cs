@@ -7,13 +7,14 @@ namespace Project.EFCore.Infrastructure;
 
 public class ToDoListDbContext : DbContext, IToDoListDbContext
 {
-    public DbSet<ToDoTask> TodoTasks { get; set; }
+    public DbSet<ToDoTask> ToDoTasks { get; set; }
     
     public ToDoListDbContext(DbContextOptions<ToDoListDbContext> options) : base(options)
     {}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        //Apply entity configuration to migrations
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
         base.OnModelCreating(modelBuilder);

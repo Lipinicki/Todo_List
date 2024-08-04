@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Project.EFCore.Infrastructure;
+using System.Reflection;
 using ToDoList.Application.Context;
+using ToDoList.Application.Services;
 
 namespace ToDoList
 {
@@ -15,7 +17,15 @@ namespace ToDoList
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(options =>
+            {
+                //Add Xml comments to swagger JSON Schema
+                var xmlFileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFileName));
+            });
+
+            //Add IToDoTaskService to DI system
+            builder.Services.AddScoped<IToDoTaskService, ToDoTaskService>();
 
             if (builder.Environment.IsDevelopment())
             {
@@ -27,8 +37,10 @@ namespace ToDoList
 
             var app = builder.Build();
 
+            //Creates the dbContext scope
             using (var scope = app.Services.CreateScope())
             {
+                //Gets the dbContext service to check if the connection was successful
                 var dbContext = scope.ServiceProvider
                     .GetRequiredService<IToDoListDbContext>();
 
