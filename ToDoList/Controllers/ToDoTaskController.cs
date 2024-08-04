@@ -91,9 +91,11 @@ public class ToDoTaskController : ControllerBase
     ///     
     /// </remarks>
     /// <response code="204">The task has been deleted.</response>
+    /// <response code="400">The request id is not valid.</response>
     /// <response code="404">There is no task with the given id on the Todo List.</response>
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteAsync(int id)
     {
