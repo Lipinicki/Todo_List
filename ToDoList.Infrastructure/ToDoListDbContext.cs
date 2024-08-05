@@ -3,7 +3,7 @@ using System.Reflection;
 using ToDoList.Application.Context;
 using ToDoList.Domain.Entities;
 
-namespace Project.EFCore.Infrastructure;
+namespace ToDoList.Infrastructure;
 
 public class ToDoListDbContext : DbContext, IToDoListDbContext
 {
