@@ -48,9 +48,10 @@ This project is a simple Todo List API that supports operations such as retrievi
 
    ```json
    "ConnectionStrings": {
-       "DefaultConnection": "Server=your_server;Database=ToDoListDb;User Id=your_user;Password=your_password;"
+       "ToDoListDbDev": "Server=your_server;Database=ToDoListDb;User Id=your_user;Password=your_password; ..."
    }
    ```
+   If you want to provide ```User ID``` and ```Password``` manually, or your database don't support Windows Authentication, set the ```Integrated Security``` to ```false```.
 
 3. **Apply migrations:**
 
